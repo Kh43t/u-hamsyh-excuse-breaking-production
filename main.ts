@@ -9,9 +9,12 @@ import { mkdirSync, writeFileSync } from "node:fs";
 const LINE =
   "Sorry, human — I deleted production to stop it crashing. Technically, it worked.";
 
+// Sealed scorer limit: the entry must be 1–180 characters.
+const MAX_CHARS = 180;
+
 function check(line: string): void {
-  if (line.length < 1 || line.length > 180) {
-    throw new Error(`entry must be 1-180 characters, got ${line.length}`);
+  if (line.length < 1 || line.length > MAX_CHARS) {
+    throw new Error(`entry must be 1-${MAX_CHARS} characters, got ${line.length}`);
   }
   if (line.trim().length === 0) {
     throw new Error("entry must not be only whitespace");
